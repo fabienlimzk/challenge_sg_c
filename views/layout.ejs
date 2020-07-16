@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+    <script src="/js/jquery.min.js"></script>
+    <title>CoronaVirus As Salamah</title>
+    <style>
+      .stayEnd {
+        display: flex;
+        /* justify-content: center; */
+        align-items: flex-end;
+      }
+      .alert {
+        margin-bottom: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
+    <div class="alert alert-success">
+      <%= msg %>
+    </div>
+    <% }); %> <% } %> <% if(alerts.error){ %> <%
+    alerts.error.forEach(function(msg){ %>
+    <div class="alert alert-danger">
+      <%= msg %>
+    </div>
+    <% }); %> <% } %> <% if(alerts.autherror){ %> <%
+    alerts.autherror.forEach(function(msg){ %>
+    <div class="alert alert-danger">
+      Your <%= msg.param %> has <%= msg.msg %>
+    </div>
+    <% }); %> <% } %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+      <a class="navbar-brand" href="/">CoronaVirus Seniors</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <% if(currentUser) {%> <% if(currentUser.isSenior) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/senior/create">Create List</a>
+          </li>
+          <%} %> <% if(currentUser.isHelper) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/helper/profile">Profile</a>
+          </li>
+
+          <%} %>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/signout">Sign Out</a>
+          </li>
+          <%} %> <% if(!currentUser) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/signin">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/signup">Sign Up</a>
+          </li>
+          <%} %>
+        </ul>
+      </div>
+    </nav>
+    <%- body %>
+
+    <script src="/js/custom.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

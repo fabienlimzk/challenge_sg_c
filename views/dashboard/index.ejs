@@ -1,0 +1,44 @@
+<div class="container">
+  <% if (!lists.length) {%>
+  <div class="alert alert-danger">
+    No Lists to show!
+  </div>
+
+  <% } else { %>
+
+  <div class="row">
+    <% lists.forEach((list) =>{ %>
+    <div class="col-4">
+      <div class="card card-flip h-100">
+        <img src="http://placehold.it/200x100" class="card-img-top" />
+        <div class="card-front">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted"><%= list.status %></h6>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted"><%= list.status %></h6>
+            <ul class="list-group list-group-flush">
+              <% list.items.forEach(item =>{ %>
+              <li class="list-group-item">
+                <%= item.name %> - <%= item.quantity %>
+              </li>
+              <% }) %>
+            </ul>
+
+            <form action="/senior/update/<%= list._id %>" method="POST">
+              <% if (list.status == "free"){ %>
+              <button type="submit" class="btn btn-info">Help!</button>
+              <% } else if(list.status == "inProgress") {%>
+              <button type="submit" class="btn btn-info">Fulfil!</button>
+              <% } %>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% }%>
+</div>

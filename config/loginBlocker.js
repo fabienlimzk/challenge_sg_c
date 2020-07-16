@@ -1,7 +1,7 @@
 module.exports = function(request, response, next) {
   if (!request.user) {
     request.flash("error", "You must be logged in to access that page");
-    response.redirect("/auth/login");
+    response.redirect("/auth/signin");
   } else {
     next();
   }

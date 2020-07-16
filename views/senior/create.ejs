@@ -1,0 +1,41 @@
+<div class="container">
+  <form method="POST" action="/senior/create">
+    <div class="container listForm">
+      <div class="row mb-3" data-id="0">
+        <div class="col-10">
+          <label>Name: </label>
+          <!-- name[] means all fields with the name name will be stored -->
+          <input name="items[0][name]" class="form-control" />
+        </div>
+        <div class="col-1">
+          <label>Quantity: </label>
+          <input
+            name="items[0][quantity]"
+            data-id="0"
+            class="form-control"
+            type="number"
+          />
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="row mb-3" data-id="1">
+        <div class="col-10">
+          <label>Name: </label>
+          <input name="items[1][name]" class="form-control" />
+        </div>
+        <div class="col-1">
+          <label>Quantity: </label>
+          <input
+            name="items[1][quantity]"
+            data-id="1"
+            class="form-control"
+            type="number"
+          />
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+    <button id="addMore" class="btn btn-primary">Add More</button>
+    <button type="submit" class="btn btn-primary">Create List</button>
+  </form>
+</div>
