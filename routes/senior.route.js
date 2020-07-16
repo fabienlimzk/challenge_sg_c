@@ -36,18 +36,19 @@ router.post("/create", (req, res) => {
 });
 
 router.post("/update/:id", (req, res) => {
-  if(req.user.isHelper) {
+  if (req.user.isHelper) {
     List.findById(req.params.id).then(list => {
-      if(list.status == "fulfilled") {
+      if (list.status == "fulfilled") {
         req.flash("error", "Completed liao!");
         return res.redirect("/dashboard");
       }
 
-      if(list.status == "free") {
+      if (list.status == "free") {
         list.status = "inProgress";
-      } else if(list.status == "inProgress") {
+      } else if (list.status == "inProgress") {
         list.status = "fulfilled";
       }
+
       list.completedBy = req.user._id;
 
       list.save()
@@ -56,7 +57,7 @@ router.post("/update/:id", (req, res) => {
         res.redirect("/dashboard");
       });
     });
-  } else if(req.user.isSenior) {
+  } else if (req.user.isSenior) {
     req.flash("error", "You cannot perform this action!");
     res.redirect("/dashboard");
   }

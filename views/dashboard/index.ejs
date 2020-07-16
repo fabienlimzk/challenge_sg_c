@@ -30,7 +30,7 @@
             <form action="/senior/update/<%= list._id %>" method="POST">
               <% if (list.status == "free"){ %>
               <button type="submit" class="btn btn-info">Help!</button>
-              <% } else if(list.status == "inProgress") {%>
+              <% } else if (list.status == "inProgress") {%>
               <button type="submit" class="btn btn-info">Fulfil!</button>
               <% } %>
             </form>

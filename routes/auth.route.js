@@ -65,6 +65,11 @@ router.get("/dashboard", isLoggedIn, (request, response) => {
       response.render("dashboard/index", { lists });
     });
   }
+  // else if (request.user.isHelper) {
+  //   List.find({ status: "inProgress" }).then(lists => {
+  //     response.render("dashboard/index", { lists });
+  //   });
+  // }
 });
 
 //-- Login Route
