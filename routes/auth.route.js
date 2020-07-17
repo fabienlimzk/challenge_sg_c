@@ -13,19 +13,21 @@ router.post("/auth/signup", async (req, res) => {
   try {
     let { firstname, lastname, age, phone, password, role } = req.body;
     
-    let user = new User({
-      firstname, 
-      lastname,
-      age,
-      address: {
-        houseNo: req.body.houseNo, 
-        street: req.body.street, 
-        city: req.body.city, 
-        district: req.body.district,
-      },
-      phone,
-      password,
-    });
+    let user = new User(
+      {
+        firstname, 
+        lastname,
+        age,
+        address: {
+          houseNo: req.body.houseNo, 
+          street: req.body.street, 
+          city: req.body.city, 
+          district: req.body.district,
+        },
+        phone,
+        password,
+      }
+    );
 
     if (role == "helper") {
       user.isHelper = true;
@@ -61,7 +63,7 @@ router.get("/dashboard", isLoggedIn, (req, res) => {
         res.render("dashboard/index", { lists });
       });
   } else if (req.user.isHelper) {
-    List.find({$or: [{status: "free"}, {status:"inProgress"}] }).then(lists => {
+    List.find({ $or: [{status: "free"}, {status:"inProgress"}] }).then(lists => {
       res.render("dashboard/index", { lists });
     });
   }
