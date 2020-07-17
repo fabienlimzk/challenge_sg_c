@@ -50,26 +50,21 @@ router.get("/auth/signin", (req, res) => {
   res.render("auth/signin");
 });
 
-router.get("/dashboard", isLoggedIn, (request, response) => {
-  if (request.user.isSenior) {
+router.get("/dashboard", isLoggedIn, (req, res) => {
+  if (req.user.isSenior) {
     //get current users list only
-    User.findById(request.user._id, "list")
+    User.findById(req.user._id, "list")
       .populate("list")
       .then((user) => {
         console.log(user);
         let lists = user.list; //populated list in user model
-        response.render("dashboard/index", { lists });
+        res.render("dashboard/index", { lists });
       });
-  } else if (request.user.isHelper) {
-    List.find({ status: "free" }).then(lists => {
-      response.render("dashboard/index", { lists });
+  } else if (req.user.isHelper) {
+    List.find({$or: [{status: "free"}, {status:"inProgress"}] }).then(lists => {
+      res.render("dashboard/index", { lists });
     });
   }
-  // else if (request.user.isHelper) {
-  //   List.find({ status: "inProgress" }).then(lists => {
-  //     response.render("dashboard/index", { lists });
-  //   });
-  // }
 });
 
 //-- Login Route
